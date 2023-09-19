@@ -17,6 +17,20 @@ export const JOB_LISTING_COLUMNS: string[] = [
   "Needs",
 ];
 
+export const JOB_APPLICANT_COLUMNS: string[] = ["name", "Applied Date"];
+
+export interface JobApplicantDataType {
+  name: string;
+  appliedDate: string;
+}
+
+export const JOB_APPLICANT_DATA: JobApplicantDataType[] = [
+  {
+    name: "Hariyanto",
+    appliedDate: "15 Aug 2023",
+  },
+];
+
 export interface JobListingDataType {
   roles: string;
   status: string;
