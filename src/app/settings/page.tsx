@@ -1,3 +1,4 @@
+import OverviewForm from "@/components/forms/OverviewForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FC } from "react";
 
@@ -14,7 +15,7 @@ const SettingsPage: FC<SettingsPageProps> = ({}) => {
           <TabsTrigger value="teams">Teams</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <div>overview</div>
+          <OverviewForm />
         </TabsContent>
         <TabsContent value="socialLinks">
           <div>socialLinks</div>

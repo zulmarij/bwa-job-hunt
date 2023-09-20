@@ -3,14 +3,9 @@ import { jobFormSchema } from "@/lib/form-schema";
 import { FC, useEffect, useRef } from "react";
 import { z } from "zod";
 
-type JobFormSchemaType = z.infer<typeof jobFormSchema>;
-
 interface CKEditorProps {
   form: any;
-  name:  keyof Pick<
-  JobFormSchemaType,
-  "jobDescription" | "responsibility" | "whoYouAre" | "niceToHaves"
->;
+  name: string;
   editorLoaded?: boolean;
 }
 
