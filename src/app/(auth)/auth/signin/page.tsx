@@ -78,7 +78,7 @@ const SignIn: FC<SignInProps> = ({}) => {
 
               <div className="text-sm">
                 Don`t have an account{" "}
-                <Link href="/signup" className="text-primary">
+                <Link href="/auth/signup" className="text-primary">
                   Sign Up
                 </Link>
               </div>
