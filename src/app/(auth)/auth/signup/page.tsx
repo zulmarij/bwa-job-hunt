@@ -9,11 +9,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { signUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
-import { FC } from "react";
+import { useRouter } from "next/navigation";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -28,9 +31,29 @@ const SignUp: FC<SignUpProps> = ({}) => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
   });
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSubmit = (value: z.infer<typeof signUpFormSchema>) => {
-    console.log(value);
+  const onSubmit = async (value: z.infer<typeof signUpFormSchema>) => {
+    try {
+      setIsLoading(true);
+      await fetch("/api/company/new-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(value),
+      });
+
+      await router.push("/auth/signin");
+    } catch (error) {
+      toast({
+        title: "error",
+        description: "Please Try Again",
+      });
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,7 +107,10 @@ const SignUp: FC<SignUpProps> = ({}) => {
                 )}
               />
 
-              <Button className="w-full">Sign Up</Button>
+              <Button className="w-full" disabled={isLoading}>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Sign Up
+              </Button>
               <div className="text-sm">
                 Already have an account{" "}
                 <Link href="/auth/signin" className="text-primary">

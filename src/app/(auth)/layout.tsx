@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "../globals.css";
 import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={epilogue.className}>
         <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );
